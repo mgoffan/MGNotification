@@ -26,11 +26,16 @@ static MGNotification *me;
     return me;
 }
 
-- (void)title:(NSString *)title activity:(BOOL)indicator completion:(void (^)(BOOL f))completion hide:(float)delay hideCompletion:(void (^)(BOOL f))hCompletion {
-    
+- (void)title:(NSString *)title
+     activity:(BOOL)indicator
+   completion:(void (^)(BOOL f))completion
+         hide:(float)delay
+hideCompletion:(void (^)(BOOL f))hCompletion
+ animDuration:(float)duration
+{
     [[[UIApplication sharedApplication] keyWindow] addSubview:self];
     
-    [self setNotif:title];
+    self.lblNotif.text = title;
     
     CGSize size = [[UIApplication sharedApplication] keyWindow].frame.size;
     
@@ -39,7 +44,7 @@ static MGNotification *me;
     if (indicator) [self addSubview:self.actInd];
     else [self.actInd removeFromSuperview];
     
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration:duration
                      animations:^(void) {
                          self.frame = (!iPad) ? CGRectMake(size.width / 2 - 90, size.height / 2 - 120, 0, 0) : CGRectMake(size.width / 2 - 80, size.height / 2 - 220, 0, 0);
                          self.alpha = 1.0f;
@@ -53,8 +58,8 @@ static MGNotification *me;
     }];
 }
 
-- (void)hideWithCompletion:(void (^)(BOOL f))completion{
-    
+- (void)hideWithCompletion:(void (^)(BOOL f))completion
+{    
     CGSize size = [[UIApplication sharedApplication] keyWindow].frame.size;
     [UIView animateWithDuration:0.3 delay:1.3 options:UIViewAnimationCurveEaseInOut animations:^(void) {
         self.frame = (!iPad) ? CGRectMake(size.width / 2, size.height / 2, 0, 0) : CGRectMake(size.width / 2, size.height / 2, 0, 0);
@@ -84,7 +89,7 @@ static MGNotification *me;
         
         self.lblNotif = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, 140, 60)];
         
-        self.lblNotif.text = @"Moving to next turn";
+        self.lblNotif.text = @"Default Text";
         self.lblNotif.numberOfLines = 0;
         self.lblNotif.lineBreakMode = UILineBreakModeWordWrap;
         self.lblNotif.textColor = [UIColor whiteColor];

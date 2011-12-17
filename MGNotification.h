@@ -21,7 +21,12 @@
 
 + (MGNotification *)aNotification;
 
-- (void)title:(NSString *)title activity:(BOOL)indicator completion:(void (^)(BOOL finished))completion hide:(float)delay hideCompletion:(void (^)(BOOL f))hCompletion;
+- (void)title:(NSString *)title
+     activity:(BOOL)indicator
+   completion:(void (^)(BOOL finished))completion
+         hide:(float)delay
+hideCompletion:(void (^)(BOOL f))hCompletion
+ animDuration:(float)duration;
 - (void)hideWithCompletion:(void (^)(BOOL finished))completion;
 
 @end
